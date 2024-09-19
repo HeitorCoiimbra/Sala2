@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalho de pessoas</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="sala.css">
+</head>
+<body>
+    <header class="d-flex justify-content-between align-items-center p-3 bg-dark text-white shadow">
+        <button class="btn btn-outline-light" onclick="toggleSidebar()">
+            ☰ Filtros
+        </button>
+        <h1 class="mx-auto">Bem-vindo</h1>
+    </header>
+<div id="sidebar" class="sidebar bg-light p-4 shadow" style="display: none;">
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="filterf1" value="f1" onchange="filterCards()">
+        <label class="form-check-label" for="filterf1">Homem</label>
+
+        <input type="checkbox" class="form-check-input" id="filterf2" value="f2" onchange="filterCards()">
+        <label class="form-check-label" for="filterf2">Mulher</label>
+
+        <input type="checkbox" class="form-check-input" id="filterf3" value="f3" onchange="filterCards()">
+        <label class="form-check-label" for="filterf3">Branco</label>
+
+        <input type="checkbox" class="form-check-input" id="filterf4" value="f4" onchange="filterCards()">
+        <label class="form-check-label" for="filterf4">Negro</label>
+    </div>
+</div>
+    <div class="container my-5 cent">
+        <h1 class="mb-4">Escolhas as Pessoas:</h1>
+        
+        <div class="row">
+            <div class="col-md-4 f1 f3">
+                <div class="card shadow-sm">
+                    <img src="figuras/joaoadm2A.jpeg" class="card-img-top" alt="Imagem do Card">
+                    <div class="card-body">
+                        <h5 class="card-title cent">João Pedro</h5>
+                        
+                        <p class="card-text cent">800 Dólares</p>
+                        <input type="checkbox" class="person" value="800">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 f2 f3">
+                <div class="card shadow-sm">
+                    <img src="figuras/camille.jpeg" class="card-img-top" alt="Imagem do Card">
+                    <div class="card-body">
+                        <h5 class="card-title  cent">Camille</h5>
+                        
+                        <p class="card-text cent">600 Dólares</p>
+                        <input type="checkbox" class="person" value="600"> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 f1 f4">
+                <div class="card shadow-sm">
+                    <img src="figuras/caua.jpeg" class="card-img-top" alt="Imagem do Card">
+                    <div class="card-body">
+                        <h5 class="card-title cent">Caua</h5>
+                        
+                        <p class="card-text cent">600 Dólares</p>
+                        <input type="checkbox" class="person" value="600">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 f2 f4">
+                <div class="card shadow-sm">
+                    <img src="figuras/mininadetombos.jpeg" class="card-img-top" alt="Imagem do Card">
+                    <div class="card-body">
+                        <h5 class="card-title cent">Kethuny</h5>
+                        
+                        <p class="card-text cent">500 Dólares</p>
+                        <input type="checkbox" class="person" value="500">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center mt-4"> 
+            <button  onclick="calculateTotal()">Calcular Total</button>
+        </div>
+        <p id="total" class="mt-3 font-weight-bold text-center">Total: 0R$</p>
+        <div class="d-flex justify-content-center mt-4">
+        <button class id="confirmButton"  style="display: none;" onclick="confirmPurchase()">Confirmar Compra</button>
+    </div>
+</div>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+         function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar.style.display === 'none') {
+            sidebar.style.display = 'block';
+        } else {
+            sidebar.style.display = 'none';
+        }
+    }
+        function calculateTotal() {
+            let total = 0;
+            document.querySelectorAll('.person:checked').forEach(function(checkbox) {
+                total += parseInt(checkbox.value);
+            });
+            document.getElementById('total').innerText = 'Total: ' + total + 'R$';
+            document.getElementById('confirmButton').style.display = total > 0 ? 'block' : 'none';
+        }
+
+        function confirmPurchase() {
+             window.location.href = 'comprar.html';
+        }
+        
+        function filterCards() {
+        const selectedFilters = Array.from(document.querySelectorAll('#sidebar input:checked')).map(input => input.value);
+        document.querySelectorAll('.col-md-4').forEach(function(card) {
+            const cardClasses = Array.from(card.classList);
+            const matches = selectedFilters.filter(filter => cardClasses.includes(filter));
+            if (selectedFilters.length === 0 || matches.length === selectedFilters.length) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+    
+</script>
+    
+</body>
+</html>

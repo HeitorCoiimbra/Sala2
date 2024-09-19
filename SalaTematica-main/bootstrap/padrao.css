@@ -1,0 +1,28 @@
+
+/* criando classes com diferentes formata��es para um mesmo elemento */
+p.titulod{
+	font-style:italic;
+	font-variant:small-caps;
+	font-weight:bold;
+	font-size:30px;
+	text-align: center;
+	color:rgb(100,255,0);
+}
+
+h1 {
+  font-family: Verdana;
+}
+
+a:link, a:visited, a:active {
+	text-decoration:none;
+}
+a:hover {
+	color:blue; 
+	font-weight:bold;
+	font-size:20px;
+	background:#ADD8E6; 
+}
+img.icones{
+	width: 40px;
+	height: 40px;
+}
